@@ -6,7 +6,9 @@ import { removeQuote, upvoteQuote, downvoteQuote} from '../actions/quotes'
 class Quotes extends Component {
 
   render() {
+    debugger
     const { quotes, removeQuote, upvoteQuote, downvoteQuote } = this.props
+    debugger
     return (
       <div>
         <hr />
