@@ -2,15 +2,12 @@
 export const addQuote = (quote) => {
     return {
         type: 'ADD_QUOTE',
-        quote: Object.assign({}, quote, { votes: 0 })
-        // quote: { ...this.quote,
-        //     vote: 0
-        // }
+        // quote: Object.assign({}, quote, { votes: 0 })
+        quote: { ...quote, votes: 0}
     };
 };
 
 export const removeQuote = (quoteId) => {
-    debugger
     return {
         type: 'REMOVE_QUOTE',
         quoteId

@@ -9,30 +9,32 @@ export default (state = [], action) => {
         ...state,
         action.quote
       ];
- 
+
     case "REMOVE_QUOTE":
-      debugger
-      let idx = state.findIndex(quote => quote.id === action.quoteId);
-      return [...state.slice(0, idx), ...state.slice(idx + 1)];
- 
+      return state.filter(quote => quote.id !== action.quoteId);
+
     case "UPVOTE_QUOTE":
+      // debugger
+      // index = state.findIndex(quote => quote.id === action.quoteId)
+      // quote = state[index]
+      // return [
+      //   ...state.slice(0, index),
+      //   Object.assign({}, quote, { votes: quote.votes += 1 }),
+      //   ...state.slice(index + 1)
+      // ]
       index = state.findIndex(quote => quote.id === action.quoteId)
-      quote = state[index]
-      return [
-        ...state.slice(0, index),
-        Object.assign({}, quote, { votes: quote.votes += 1 }),
-        ...state.slice(index + 1)
-      ]
- 
+      let temp_state = [...state];
+      temp_state[index] = {...temp_state[index], votes: temp_state[index].votes += 1}
+      state = temp_state
+      return state
+
       case 'DOWNVOTE_QUOTE':
         index = state.findIndex(quote => quote.id === action.quoteId)
-        quote = state[index]
-        if (quote.votes > 0) {
-          return [
-            ...state.slice(0, index),
-            Object.assign({}, quote, { votes: quote.votes -= 1 }),
-            ...state.slice(index + 1)
-          ]
+        temp_state = [...state];
+        if (temp_state[index].votes > 0) {
+          temp_state[index] = {...temp_state[index], votes: temp_state[index].votes -= 1}
+          state = temp_state
+          return state
         }
         return state
   
